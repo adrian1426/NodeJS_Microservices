@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  users:
+    build: ./micro/user-services
+  books:
+    build: ./micro/book-services
+  cars:
+    build: ./micro/car-services
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - users
+      - books
+      - cars
